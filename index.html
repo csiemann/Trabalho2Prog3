@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-orange.min.css" /> 
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script src="script/jquery-3.5.1.min.js"></script>
+        <style>
+            * {
+                font-family: 'Roboto' !important;
+            }
+        </style>
+        <title>Trabalho 2</title>
+    </head>    
+    <body>
+        <form>
+            <h4>Adicionado novo Empregado</h4>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Nome</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="number" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Salário</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="number" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Idade</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Avatar</label>
+            </div>
+            <br>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                Salvar
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Cancelar
+            </button>
+        </form>
+
+        <hr>
+        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+              <tr>
+                <th >Id</th>
+                <th class="mdl-data-table__cell--non-numeric">Nome</th>
+                <th>Salário</th>
+                <th>Idade</th>
+                <th>Avatar</th>
+                <th class="mdl-data-table__cell--non-numeric">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="list">
+              
+            </tbody>
+          </table>
+        <script>
+            $.get('http://dummy.restapiexample.com/api/v1/employees', function(response){
+                var data = response.data;
+                for (var i = 0; i < data.length; i++) {
+                    var line = data[i];
+                    var strId = 'line-'+line.id;
+                    $('#list').append('<tr id="'+strId+'">');
+                    $('#'+strId).append('<td>'+line.id+'</td>');
+                    $('#'+strId).append('<td class="mdl-data-table__cell--non-numeric">'+line.employee_name+'</td>');
+                    $('#'+strId).append('<td>'+line.employee_salary+'</td>');
+                    $('#'+strId).append('<td>'+line.employee_age+'</td>');
+                    $('#'+strId).append('<td>'+line.profile_image+'</td>');
+                    $('#'+strId).append('<td><a ></a>|<a></a></td>');
+                }
+            });
+        </script>
+    </body>
+</html>
